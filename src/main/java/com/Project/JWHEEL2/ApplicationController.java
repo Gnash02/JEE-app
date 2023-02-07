@@ -8,6 +8,11 @@ public class ApplicationController {
 	@GetMapping("/index")
 	public String goHome() {
 		return "index";
-	}
+	}/*
+	@GetMapping("/login")
+	public String LogIn() {
+		return "login";
+	}*/
+	
 }
 

@@ -10,6 +10,7 @@ $('document').ready(function(){
 			$("#FuelType-edit").val(Vehicle.FuelType);
 			$("#Status-edit").val(Vehicle.Status);
 			$("#LastVisit-edit").val(Vehicle.LastVisit);
+			$("#price-edit").val(Vehicle.price);
 
 		})
 		$('#editModal').modal();
@@ -26,5 +27,23 @@ $('document').ready(function(){
    $('#photoModal #carPhoto').attr('src', href);
    $('#photoModal').modal();		
 });
-
-});
+	$('table #image-btn').on('click',function(event){
+		  
+		   try {
+       	 	var href=$(this).attr('href');
+			$.get(href,function(Vehicle){
+			$("#id-editimg").val(Vehicle.id);});
+			$('#uploadphoto').modal();
+    } catch(ex) {
+        alert('An error occurred');
+    }
+     event.preventDefault();
+	});
+	$('.table #photoButton').on('click',function(event) {
+   event.preventDefault();
+   var href = $(this).attr('href');
+   $('#photoModal #vehiclePhoto').attr('src', href);
+   $('#photoModal').modal();		
+});	
+ 
+})

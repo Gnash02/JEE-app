@@ -1,6 +1,7 @@
 package com.Project.JWHEEL2.Controllers;
 
-import java.nio.file.Paths;
+import java.io.IOException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.Project.JWHEEL2.Models.Vehicle;
 import com.Project.JWHEEL2.Services.VehiculesService;
 
@@ -25,7 +26,7 @@ public class VehiculeController {
 	public String goHome(Model model) {
 		List<Vehicle> VehicleList=vehicleservice.getALLVehicules();
 		model.addAttribute("Vehicules",VehicleList);
-		return "Vehicules";
+		return "/Vehicules";
 	}
 	@PostMapping("/Vehicules/addnewV")
 	public String addnewV(Vehicle vehicle) {
@@ -47,6 +48,10 @@ public class VehiculeController {
 		vehicleservice.delete(id);
 		return "redirect:/Vehicules";
 	}
-	
+	@PostMapping(value="/Vehicules/SaveImage")
+	public String SaveImage(Vehicle vehicle,@RequestParam("image") MultipartFile image) throws IllegalStateException, IOException {
+		vehicleservice.fileupload(vehicle,image);
+		return "redirect:/Vehicules";
+	}
 }
 

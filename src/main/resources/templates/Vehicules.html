@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Blank</title>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -31,11 +31,10 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{\index}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3"> Admin Dashboard</div>
             </a>
 
             <!-- Divider -->
@@ -43,7 +42,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" th:href="@{\index}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -53,7 +52,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+              Classes
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -324,21 +323,14 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">ADMIN</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
+          
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
@@ -360,8 +352,9 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Vehicles page</h1>
+                    <h1 class="h2 mb-4 center text-gray-900">Vehicles page</h1>
                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Add new Vehicle</button>
+                     <!--LIST OF VEHICLES-->
                      <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -372,6 +365,7 @@
                                             <th>Model</th>
                                             <th>FuelType</th>
                                             <th>Status</th>
+                                            <th>Price</th>
                                             <th>LastVisit</th>
                                             <th>Actions</th>
                                         </tr>
@@ -379,20 +373,20 @@
                                    
                                     <tbody>
                                         <tr th:each="Vehicle:${Vehicules}">
-											<td>
-    <a id="photoButton" th:href="@{'/img/photos/' + ${Vehicle.id} +'.jpg'}">
- <img th:src="@{'/img/photos/' + ${Vehicle.id} +'.jpg'}" width="40" height="40">
- </a>
- </td>
+<td><a id="photoButton" th:href="@{'/img/' + ${Vehicle.id} +'.jpg'}">
+ <img th:src="@{'/img/' + ${Vehicle.id} +'.jpg'}" width="40" height="40">
+ </a></td>
                                             <td th:text="${Vehicle.id}"></td>
                                             <td th:text="${Vehicle.Type}"></td>
                                             <td th:text="${Vehicle.Model}"></td>
                                             <td th:text="${Vehicle.FuelType}"></td>
                                             <td th:text="${Vehicle.Status}"></td>
+                                            <td th:text="${Vehicle.price}"></td>
                                             <td th:text="${Vehicle.LastVisit}"></td>
                                             <td><div class="btn-group">
 												<a th:href="@{/Vehicules/findVbyid(id=${Vehicle.id})}"class="btn btn-primary" id="edit-btn" >Edit</a>
 												<a th:href="@{/Vehicules/DeleteV(id=${Vehicle.id})}"class="btn btn-danger" id="delete-btn" >Delete</a>
+											    <a th:href="@{/Vehicules/findVbyid(id=${Vehicle.id})}" class="btn btn-primary" id="image-btn" >Image</a>
 													</div></td>
                                         </tr>
                                        
@@ -410,7 +404,8 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright Hiba Guezri IAGI2 2023
+						</span>
                     </div>
                 </div>
             </footer>
@@ -494,8 +489,12 @@
             <label for="recipient-name" class="col-form-label">Last-Visit:</label>
             <input value="date" type="date" class="form-control" id="LastVisit-edit" name="LastVisit">
           </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">price per day:</label>
+            <input type="number" class="form-control" id="price-edit" name="price" >
           </div>
-             <div class="form-group">
+                       
+         <div class="form-group">
         <button type="Submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
@@ -506,6 +505,9 @@
     </div>
   </div>
 </div>
+<!--..-END OF EDIT MODAL-..-->
+
+
 <!--add new modal-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -546,9 +548,13 @@
 			    <option value="Hired">Hired</option>
 			  </select>
           </div>
+            <div class="form-group">
+            <label for="recipient-name" class="col-form-label">price per day:</label>
+            <input type="number" class="form-control" id="price" name="price" >
+          </div>
              <div class="form-group">
             <label for="recipient-name" class="col-form-label">Last-Visit:</label>
-            <input type="date" class="form-control" id="LastVisit-date" name="LastVisit" required>
+            <input type="date" class="form-control" id="LastVisit-date" name="LastVisit" >
           </div>
           </div>
              <div class="form-group">
@@ -593,7 +599,7 @@
         </button>
       </div>
       <div class="modal-body">
-      		<img id="CarPhoto" src="" width="90%" height="90%">
+      		<img id="vehiclePhoto" src="" width="90%" height="90%">
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -601,6 +607,39 @@
     </div>
   </div>
 </div> 
+
+<!--Upload photo modal-->
+<div class="modal fade" id="uploadphoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Vehicle</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/Vehicules/SaveImage}" method="POST" enctype="multipart/form-data">
+			 <div class="form-group">
+            <label for="recipient-name" class="col-form-label">ID:</label>
+            <input type="text" class="form-control" id="id-editimg" name="id" readonly>
+          </div>
+          <div class="form-group">
+  			<label for="recipient-name" class="col-form-label">upload image:</label>
+            <input type="file" class="form-control" id="fileImage" name="image" accept=" image/jpeg">
+          </div>
+         
+         <div class="form-group">
+        <button type="Submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

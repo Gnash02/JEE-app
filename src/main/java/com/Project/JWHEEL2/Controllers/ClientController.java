@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.Project.JWHEEL2.Models.Client;
 import com.Project.JWHEEL2.Services.ClientsService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ClientController {
 	@Autowired ClientsService clientservice;
 	
 	@GetMapping("/Clients")
-	public String goHome(Model model) {
+	public String goHome(Model model,HttpSession session) {
 		List<Client> ClientList=clientservice.getAllClients();
+	    session.setAttribute("Clients", ClientList);
 		model.addAttribute("Clients",ClientList);
 		return "Client";
 	}

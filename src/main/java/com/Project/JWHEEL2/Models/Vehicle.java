@@ -3,7 +3,11 @@ package com.Project.JWHEEL2.Models;
 
 
 
+import java.math.BigDecimal;
 import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -20,15 +24,22 @@ public class Vehicle {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int id;
-	public String Image ;
+
 	public String Type;
 	public String Model;
 	public String FuelType;
 	public String Status;
-    @Column(nullable = true)
-	public Date LastVisit;
+	private BigDecimal price;
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
 	
-		
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	public Date LastVisit;
+    @Transient
 	public int getId() {
 		return id;
 	}
@@ -65,11 +76,4 @@ public class Vehicle {
 	public void setLastVisit(Date lastVisit) {
 		LastVisit = lastVisit;
 	}
-	public String getImage() {
-		return Image;
-	}
-	public void setImage(String image) {
-		Image = image;
-	}
-	
 }

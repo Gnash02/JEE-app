@@ -16,11 +16,13 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+
 	public String name;
 	public String address;
 	public String city;
 	public String phone;
 	public String email;
+	
 	public int getId() {
 		return id;
 	}
