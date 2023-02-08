@@ -4,7 +4,7 @@ package com.Project.JWHEEL2.Models;
 
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,7 +36,6 @@ public class Vehicle {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date LastVisit;
     @Transient
