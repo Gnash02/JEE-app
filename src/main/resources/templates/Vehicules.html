@@ -352,9 +352,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h2 mb-4 center text-gray-900">Vehicles page</h1>
-                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Add new Vehicle</button>
+                     
                      <!--LIST OF VEHICLES-->
+                     <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Vehicles List</h6>
+                        </div>
+                        <button type="button" style="width: 150px; margin-left: 50px; margin-top: 5px;" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Add new Vehicle</button>
+                      <div class="card-body">
                      <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -394,6 +399,8 @@
                                 </table>
                             </div>
 
+               
+               </div>
                 </div>
                 <!-- /.container-fluid -->
 

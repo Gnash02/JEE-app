@@ -1,29 +1,37 @@
 package com.Project.JWHEEL2.Models;
- 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
- 
+
 @Entity
-@Table(name = "users")
+@Table(name="user")
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-     
-    @Column(nullable = false, unique = true, length = 40)  
-    private String email;
-     
-    @Column(nullable = false, unique = true, length = 10)
-    private String password;
-     
-    @Enumerated(EnumType.STRING)
-    private Role role;
- 
-    public User() {}
-     
-    public User(String email, String password, Role role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="user_id")
+	private Integer id;
+
+	private String username;
+
+	private String password;
+
+	private boolean enabled;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinTable(name="users_roles",joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="role_id"))
+	private Set<Role> roles=new HashSet<>();
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 	public Integer getId() {
 		return id;
@@ -33,12 +41,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -49,14 +57,12 @@ public class User {
 		this.password = password;
 	}
 
-	public Role getRole() {
-		return role;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
- 
-    // getters and setters are not shown for brevity   
-     
+
 }
