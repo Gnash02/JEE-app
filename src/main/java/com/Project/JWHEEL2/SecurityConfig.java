@@ -40,7 +40,8 @@ public class SecurityConfig {
 		 .requestMatchers("/singup").permitAll()
          .requestMatchers("/js/**", "/css/**", "/img/**","/lib/**","/scss/**","/vendor/**").permitAll()
          .requestMatchers("/Clients/Delete/**","/Vehicules/DeleteV","/Bookings/Delete/**").hasAuthority("ADMIN")
-         
+         .requestMatchers("/rental-request/**").hasAnyAuthority("ADMIN","USER","EDITOR")
+
          .anyRequest().authenticated()
 		.and()
 		.formLogin()
