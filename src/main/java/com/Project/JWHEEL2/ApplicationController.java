@@ -13,6 +13,9 @@ public class ApplicationController {
 	public String LogIn() {
 		return "login";
 	}*/
-	
+	@GetMapping("/Dashboard")
+	public String goDashboard() {
+		return "Dashboard";
+	}
 }
 

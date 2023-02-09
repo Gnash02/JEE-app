@@ -28,6 +28,12 @@ public class VehiculeController {
 		model.addAttribute("Vehicules",VehicleList);
 		return "/Vehicules";
 	}
+	@GetMapping("/car")
+	public String goproducts(Model model) {
+		List<Vehicle> VehicleList=vehicleservice.getALLVehicules();
+		model.addAttribute("Vehicules",VehicleList);
+		return "/car";
+	}
 	@PostMapping("/Vehicules/addnewV")
 	public String addnewV(Vehicle vehicle) {
 		vehicleservice.save(vehicle);

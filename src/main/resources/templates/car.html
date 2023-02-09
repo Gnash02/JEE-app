@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Wheelz</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
- 
+    
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -46,8 +46,8 @@
                     <div class="navbar-nav ml-auto py-0">
                         <a  th:href="@{/index}" class="nav-item nav-link active">Home</a>
                         <a   th:href="@{/car}" class="nav-item nav-link">Offers</a>
-                        <a   th:href="@{/contact}" class="nav-item nav-link">Contact</a>
-                        <a  th:href="@{/login}"class="nav-item nav-link">Login</a>
+                        <a  th:href="@{/contact}" class="nav-item nav-link">Contact</a>
+                        <a   th:href="@{/login}" class="nav-item nav-link">Login</a>
                        
                     </div>
                 </div>
@@ -55,30 +55,60 @@
         </div>
     </div>
     <!-- Topbar End -->
-    <br><br><br>
-    <!-- login  -->
-    <div class="login-box">
-        <h1 class="h1">Login</h1>
-        
-        <form class="form">
-          <label>Email</label>
-          <input type="email" placeholder="" />
-          <label>Password</label>
-          <input type="password" placeholder="" />
-          <input type="button" value="Submit" />
-        </form>
+
+
+            
+
+     <!--Page Header Start--> 
+    <div class="container-fluid page-header">
+        <h1 class="display-3 text-uppercase text-white mb-3">Offers</h1>
+        <div class="d-inline-flex text-white">
+            <h6 class="text-uppercase m-0"><a class="text-white"  th:href="@{/index}">Home</a></h6>
+            <h6 class="text-body m-0 px-3">/</h6>
+            <h6 class="text-uppercase text-body m-0">Offers</h6>
+        </div>
+    </div>
+    <!-- Page Header Start -->
+
+
+    <!-- Rent A Car Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Find Your Desired Car</h1>
+  <div class="row">
+    <div th:each="Vehicle:${Vehicules}" class="col-sm-6 col-md-4">
+      <div class="card" style="width: 300px;
+   height: 400px; margin-top: 20px;">
+        <a id="photoButton" th:href="@{'/img/' + ${Vehicle.id} +'.jpg'}">
+          <img  style="width: 300px;
+   height: 200px;" class="card-img-top" th:src="@{'/img/' + ${Vehicle.id} +'.jpg'}" alt="Vehicle Image">
+        </a>
+        <div class="card-body">
+          <h5 class="card-title" th:text="${Vehicle.Model}"></h5>
+          <p class="card-text">
+            Type: <span th:text="${Vehicle.Type}"></span><br>
+            Fuel Type: <span th:text="${Vehicle.FuelType}"></span><br>
+            Status: <span th:text="${Vehicle.Status}"></span><br>
+            Price: <span th:text="${Vehicle.price}"></span><br>
+            Last Visit: <span th:text="${Vehicle.LastVisit}"></span><br>
+          </p><!--
+          <div class="btn-group">
+            <a th:href="@{/Vehicules/findVbyid(id=${Vehicle.id})}"class="btn btn-primary" id="edit-btn" >Edit</a>
+            <a th:href="@{/Vehicules/DeleteV(id=${Vehicle.id})}"class="btn btn-danger" id="delete-btn" >Delete</a>
+            <a th:href="@{/Vehicules/findVbyid(id=${Vehicle.id})}" class="btn btn-primary" id="image-btn" >Image</a>
+          </div>-->
+        </div>
       </div>
-      <p class="para-2">
-        Not have an account? <a href="signup.html">Sign Up Here</a>
-      </p>
-    <!-- login  -->
+    </div>
+  </div>
+</div>
+</div>
+        </div>
+    </div>
+    <!-- Rent A Car End -->
 
-    
-   
 
 
- 
-    
 
 
         <!-- Footer Start -->
@@ -147,7 +177,7 @@
             </div>
         </div>
         <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
-            <p class="mb-2 text-center text-body">&copy; <a href="https://freewebsitecode.com/">Wheelz</a>. All Rights Reserved.</p>
+            <p class="mb-2 text-center text-body">&copy; <a href="#">Wheelz</a>. All Rights Reserved.</p>
             
                                 
          <!--<p class="m-0 text-center text-body">Designed by <a href="https://freewebsitecode.com">Free Website Code</a></p-->
