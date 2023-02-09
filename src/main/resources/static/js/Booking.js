@@ -1,4 +1,3 @@
-
 $('document').ready(function(){
   $('table #edit-btn').on('click',function(event){
     event.preventDefault();

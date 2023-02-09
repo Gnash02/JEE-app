@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +33,7 @@
     <div class="container-fluid bg-dark py-3 px-lg-5 d-none d-lg-block">
         <div class="position-relative px-lg-5" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-secondary navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="index.html" class="navbar-brand">
+                <a th:href="@{/index}" class="navbar-brand">
                     <!--<h1 class="text-uppercase text-primary mb-1">
                        
                         Wheelz</h1>-->
@@ -59,17 +59,20 @@
     <!-- login  -->
     <div class="login-box">
         <h1 class="h1">Login</h1>
-        
-        <form class="form">
-          <label>Email</label>
-          <input type="email" placeholder="" />
+        <div th:if="${param.error}">
+			Invalid username and password.</div>
+		<div th:if="${param.logout}">
+			You have been logged out.</div>
+        <form class="form" th:action="@{/login}" method="post">
+          <label>Username</label>
+			<input type="text" name="username" placeholder="Username"/>
           <label>Password</label>
-          <input type="password" placeholder="" />
-          <input type="button" value="Submit" />
+			<input type="password" name="password" placeholder="Password"/>
+			<input type="submit" value="submit" />
         </form>
       </div>
       <p class="para-2">
-        Not have an account? <a href="signup.html">Sign Up Here</a>
+        Not have an account? <a th:href="@{/singup}">Sign Up Here</a>
       </p>
     <!-- login  -->
 
@@ -170,7 +173,7 @@
     <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 
 </html>

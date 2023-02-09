@@ -35,10 +35,24 @@ public class SecurityConfig {
 	public SecurityFilterChain filerChain (HttpSecurity http) throws Exception{
 		http.authenticationProvider(authenticationProvider());
 		http.authorizeRequests()
-		.anyRequest().authenticated()
+		
+		 .requestMatchers("/index","/").permitAll()
+		 .requestMatchers("/singup").permitAll()
+         .requestMatchers("/js/**", "/css/**", "/img/**","/lib/**","/scss/**","/vendor/**").permitAll()
+         .requestMatchers("/Clients/Delete/**","/Vehicules/DeleteV","/Bookings/Delete/**").hasAuthority("ADMIN")
+         
+         .anyRequest().authenticated()
 		.and()
-		.formLogin().permitAll()
+		.formLogin()
+        .loginPage("/login")
+        .defaultSuccessUrl("/index")
+        .permitAll()
 		.and()
-		.logout().permitAll();
+		.logout()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/index")
+		.invalidateHttpSession(true)
+		.permitAll();
+		
 		 return http.build();
 }}
